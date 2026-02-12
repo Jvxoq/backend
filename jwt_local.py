@@ -3,14 +3,19 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import jwt
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
 
 app = FastAPI()
 
 security = HTTPBearer()
 
+# Load the .env into the environment
+load_dotenv()
+
 # Your secret - in production use environment variable
-SECRET_KEY = "your_secret_key"
-ALGORITHM = "HS256"
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
  
 # Login Request Model
 class LoginRequest(BaseModel):
